@@ -1,9 +1,6 @@
 package happy.server.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
@@ -21,6 +18,9 @@ public class Member {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Embedded
+    private Address address;
+
     protected Member() {
     }
 
@@ -32,6 +32,10 @@ public class Member {
 
     public void changePassword(String password) {
         this.password = password;
+    }
+
+    public void changeAddress(Address address) {
+        this.address = address;
     }
 
 }
