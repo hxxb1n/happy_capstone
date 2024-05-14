@@ -23,4 +23,9 @@ public class Delivery {
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
 
+    // 출입 바코드 테이블
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parcel_id")
+    private Parcel parcel;
+
 }
