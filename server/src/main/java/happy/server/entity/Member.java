@@ -2,10 +2,12 @@ package happy.server.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "member")
 @Getter
+@Setter
 public class Member {
 
     @Id
@@ -21,14 +23,8 @@ public class Member {
     @Embedded
     private Address address;
 
-    protected Member() {
-    }
-
-    public Member(Long id, String name, String password) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-    }
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
 
     public void changePassword(String password) {
         this.password = password;
