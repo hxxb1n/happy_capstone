@@ -1,5 +1,6 @@
-package com.example.happy_app;
+package com.example.happy_app.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +9,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.happy_app.ProductListFragment;
+import com.example.happy_app.R;
+import com.example.happy_app.model.Product;
+
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     private List<Product> productList;
+    private Context context;
+    private ProductListFragment.OnProductSelectedListener listener;
 
-    public ProductAdapter(List<Product> productList) {
+    public ProductAdapter(List<Product> productList, Context context, ProductListFragment.OnProductSelectedListener listener) {
         this.productList = productList;
+        this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
@@ -31,6 +40,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.textViewProductName.setText(product.getName());
         holder.textViewProductDescription.setText(product.getDescription());
         holder.textViewProductPrice.setText(String.valueOf(product.getPrice()));
+
+        holder.itemView.setOnClickListener(v -> listener.onProductSelected(product));
     }
 
     @Override

@@ -1,10 +1,12 @@
-package com.example.happy_app;
+package com.example.happy_app.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.happy_app.R;
 
 public class DeliverymanActivity extends AppCompatActivity {
 

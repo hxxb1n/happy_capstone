@@ -1,4 +1,4 @@
-package com.example.happy_app;
+package com.example.happy_app.model;
 
 public class Product {
     private String name;
@@ -11,7 +11,6 @@ public class Product {
         this.price = price;
     }
 
-    // Getters
     public String getName() {
         return name;
     }

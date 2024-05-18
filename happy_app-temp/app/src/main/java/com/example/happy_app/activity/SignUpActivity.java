@@ -1,4 +1,4 @@
-package com.example.happy_app;
+package com.example.happy_app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.happy_app.R;
 import com.example.happy_app.api.ApiClient;
 import com.example.happy_app.api.CreateMemberRequest;
 import com.example.happy_app.api.CreateMemberResponse;
