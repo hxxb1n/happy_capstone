@@ -43,7 +43,7 @@ public class MemberApi {
         Member loginMember = memberService.MemberLogin(request.getId(), request.getPassword());
         if (loginMember != null) {
             log.info("{} 로그인 성공", request.getId());
-            return new CreateMemberResponse(loginMember.getName(), loginMember.getAuthority());
+            return new CreateMemberResponse(loginMember.getId(), loginMember.getName(), loginMember.getAuthority());
         } else {
             throw new IllegalStateException("로그인 실패");
         }
@@ -66,6 +66,12 @@ public class MemberApi {
         }
 
         public CreateMemberResponse(String name, Authority authority) {
+            this.name = name;
+            this.authority = authority;
+        }
+
+        public CreateMemberResponse(Long id, String name, Authority authority) {
+            this.id = id;
             this.name = name;
             this.authority = authority;
         }

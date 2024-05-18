@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.happy_app.R;
 
 public class ProductDetailFragment extends Fragment {
 
