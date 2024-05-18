@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/logo.png" alt="쇼핑몰 로고" width="420" />
+  <img src="assets/logo.png" alt="쇼핑몰 로고" width="500" />
 </div>
 
 ## IoT 기반 쇼핑몰 배달 시스템
