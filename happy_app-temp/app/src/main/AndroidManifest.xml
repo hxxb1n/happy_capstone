@@ -27,9 +27,15 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".SignUpActivity">
+        <activity android:name=".SignUpActivity">
         </activity>
+
+        <activity android:name=".ShoppingActivity">
+        </activity>
+
+        <activity android:name=".DeliverymanActivity">
+        </activity>
+
 
     </application>
 

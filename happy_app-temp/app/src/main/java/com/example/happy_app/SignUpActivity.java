@@ -58,6 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
                         assert responseBody != null;
                         if (Objects.equals(responseBody.getName(), request.getName())) {
                             Toast.makeText(SignUpActivity.this, "회원 가입 완료: " + responseBody.getName(), Toast.LENGTH_SHORT).show();
+                            navigateToMainActivity();
                         } else if (Objects.equals(responseBody.getName(), "1")) {
                             Toast.makeText(SignUpActivity.this, responseBody.getId() + " 는 이미 중복된 아이디 입니다.", Toast.LENGTH_SHORT).show();
                         } else {
@@ -85,4 +86,11 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void navigateToMainActivity() {
+        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }

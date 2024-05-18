@@ -11,6 +11,11 @@ public class CreateMemberRequest {
         this.password = password;
     }
 
+    public CreateMemberRequest(Long id, String password) {
+        this.id = id;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }

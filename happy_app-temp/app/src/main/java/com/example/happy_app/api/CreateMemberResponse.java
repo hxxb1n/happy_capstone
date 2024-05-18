@@ -3,10 +3,12 @@ package com.example.happy_app.api;
 public class CreateMemberResponse {
     private String name;
     private Long id;
+    private String authority;
 
-    public CreateMemberResponse(String name, Long id) {
+    public CreateMemberResponse(String name, Long id, String authority) {
         this.name = name;
         this.id = id;
+        this.authority = authority;
     }
 
     public String getName() {
@@ -17,6 +19,10 @@ public class CreateMemberResponse {
         return id;
     }
 
+    public String getAuthority() {
+        return authority;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -25,4 +31,7 @@ public class CreateMemberResponse {
         this.id = id;
     }
 
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
 }

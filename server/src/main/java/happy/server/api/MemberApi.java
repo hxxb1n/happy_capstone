@@ -1,5 +1,6 @@
 package happy.server.api;
 
+import happy.server.entity.Authority;
 import happy.server.entity.Member;
 import happy.server.repository.MemberRepository;
 import happy.server.service.MemberService;
@@ -42,7 +43,7 @@ public class MemberApi {
         Member loginMember = memberService.MemberLogin(request.getId(), request.getPassword());
         if (loginMember != null) {
             log.info("{} 로그인 성공", request.getId());
-            return new CreateMemberResponse(loginMember.getName());
+            return new CreateMemberResponse(loginMember.getName(), loginMember.getAuthority());
         } else {
             throw new IllegalStateException("로그인 실패");
         }
@@ -59,9 +60,16 @@ public class MemberApi {
     public static class CreateMemberResponse {
         private String name;
         private Long id;
+        private Authority authority;
         public CreateMemberResponse(String name) {
             this.name = name;
         }
+
+        public CreateMemberResponse(String name, Authority authority) {
+            this.name = name;
+            this.authority = authority;
+        }
+
         public CreateMemberResponse(Long id) {
             this.id = id;
         }
