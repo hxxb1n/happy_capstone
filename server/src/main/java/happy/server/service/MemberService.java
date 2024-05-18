@@ -30,11 +30,9 @@ public class MemberService {
     }
 
     // 중복 회원 검사
-    private void validateDuplicateMember(Member member) {
-        List<Member> findMembers = memberRepository.fineByName(member.getName());
-        if (!findMembers.isEmpty()) {
-            throw new IllegalStateException("이미 존재하는 아이디입니다.");
-        }
+    public boolean validateDuplicateMember(Member member) {
+        Member fineOne = memberRepository.fineOne(member.getId());
+        return fineOne == null;
     }
 
     // 회원 전체 조회
