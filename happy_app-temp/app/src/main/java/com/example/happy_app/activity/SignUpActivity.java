@@ -61,7 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(SignUpActivity.this, "회원 가입 완료: " + responseBody.getName(), Toast.LENGTH_SHORT).show();
                             navigateToMainActivity();
                         } else if (Objects.equals(responseBody.getName(), "1")) {
-                            Toast.makeText(SignUpActivity.this, responseBody.getId() + " 는 이미 중복된 아이디 입니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, request.getId() + " 는 이미 중복된 아이디 입니다.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(SignUpActivity.this, "기타 메시지: " + responseBody.getName(), Toast.LENGTH_SHORT).show();
                         }
