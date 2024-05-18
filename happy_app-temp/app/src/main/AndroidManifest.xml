@@ -39,6 +39,12 @@
         <activity android:name=".activity.ProductDetailActivity">
         </activity>
 
+        <activity android:name=".activity.ProfileActivity">
+        </activity>
+
+        <activity android:name=".activity.OrderListActivity">
+        </activity>
+
 
 
     </application>

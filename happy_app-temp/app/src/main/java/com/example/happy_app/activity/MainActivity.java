@@ -16,6 +16,8 @@ import com.example.happy_app.api.CreateMemberRequest;
 import com.example.happy_app.api.CreateMemberResponse;
 import com.example.happy_app.api.MemberApi;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -91,8 +93,13 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<CreateMemberResponse> call, Throwable t) {
-                        Log.e("MainActivity", "로그인 요청 실패: " + t.getMessage(), t);
-                        Toast.makeText(MainActivity.this, "로그인 요청 실패: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        if (t instanceof IOException) {
+                            // 서버가 꺼져있을 때 메세지
+                            Toast.makeText(MainActivity.this, "요청 지연", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.e("MainActivity", "로그인 요청 실패: " + t.getMessage(), t);
+                            Toast.makeText(MainActivity.this, "로그인 요청 실패: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
             }
