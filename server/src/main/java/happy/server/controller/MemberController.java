@@ -1,43 +1,49 @@
 package happy.server.controller;
 
+import happy.server.entity.Address;
 import happy.server.entity.Member;
 import happy.server.service.MemberService;
-import lombok.Data;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+import java.util.List;
+
+@Controller
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("members/join")
-    public CreateMemberResponse joinMember(@RequestBody @Validated CreateMemberRequest request) {
-        Member member = new Member();
-        member.setId(request.getId());
-        member.setName(request.getName());
-        member.setPassword(request.getPassword());
-        memberService.join(member);
-        return new CreateMemberResponse(member.getId());
+    @GetMapping("/members/new")
+    public String createForm(Model model) {
+        model.addAttribute("memberForm", new MemberForm());
+        return "members/createMemberForm";
     }
 
-    @Data
-    public static class CreateMemberRequest {
-        private Long id;
-        private String name;
-        private String password;
-    }
+    @PostMapping("members/new")
+    public String create(@Valid MemberForm form, BindingResult result) {
 
-    @Data
-    public static class CreateMemberResponse {
-        private Long memberId;
-        public CreateMemberResponse(Long memberId) {
-            this.memberId = memberId;
+        if (result.hasErrors()) {
+            return "members/createMemberForm";
         }
+
+        Address address = new Address(form.getCity(), form.getStreet(), form.getZip());
+        Member member = new Member();
+        member.setName(form.getName());
+        memberService.join(member);
+        return "redirect:/";
+    }
+
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+        return "members/memberList";
     }
 
 }

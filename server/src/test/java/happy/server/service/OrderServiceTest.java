@@ -1,6 +1,7 @@
 package happy.server.service;
 
 import happy.server.entity.*;
+import happy.server.exception.NotEnoughStockException;
 import happy.server.repository.OrderRepository;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,10 @@ class OrderServiceTest {
     @Test
     public void 상품주문() throws Exception {
         //given
-        Member member = new Member(1234L, "park", "1234");
+        Member member = new Member();
+        member.setId(235203598L);
+        member.setPassword("1234");
+        member.setName("park");
         member.changeAddress(new Address("마산", "월영", "44554"));
         em.persist(member);
         Item item = new Item();
@@ -42,12 +46,27 @@ class OrderServiceTest {
     }
 
     @Test
-    public void 주문취소() throws Exception {
+    public void 상품주문_재고_수량_초과() throws Exception {
         //given
+        Member member = new Member();
+        member.setId(235203598L);
+        member.setPassword("1234");
+        member.setName("park");
+        member.changeAddress(new Address("마산", "월영", "44554"));
+        em.persist(member);
+        Item item = new Item();
+        item.setName("티켓");
+        item.setPrice(12000);
+        item.setStockQuantity(10);
+        em.persist(item);
+
+        int orderCount = 11;
 
         //when
+        orderService.order(member.getId(), item.getId(), orderCount);
 
         //then
+        fail("재고 수량 부족");
     }
 
     @Test

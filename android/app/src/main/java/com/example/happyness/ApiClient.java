@@ -9,7 +9,7 @@ public class ApiClient {
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://3.138.210.211:8080/") // 서버 주소로 변경
+                    .baseUrl("http://localhost:8080/") // 서버 주소로 변경
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
