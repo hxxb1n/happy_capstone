@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -37,6 +39,10 @@ public class MemberRepository {
     public List<Member> fineByName(final String name) {
         return em.createQuery("select m from Member m where m.name = :name", Member.class)
                 .setParameter("name", name).getResultList();
+    }
+
+    public Optional<Member> findByLoginId(final Long memberId) {
+        return findAll().stream().filter(m -> Objects.equals(m.getId(), memberId)).findFirst();
     }
 
 }

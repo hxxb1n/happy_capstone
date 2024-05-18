@@ -23,6 +23,12 @@ public class MemberService {
         return member.getId();
     }
 
+    // 로그인 기능
+    public Member MemberLogin(Long memberId, String password) {
+        return memberRepository.findByLoginId(memberId)
+                .filter(m -> m.getPassword().equals(password)).orElse(null);
+    }
+
     // 중복 회원 검사
     private void validateDuplicateMember(Member member) {
         List<Member> findMembers = memberRepository.fineByName(member.getName());

@@ -1,6 +1,7 @@
 package happy.server.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,9 +16,11 @@ public class Member {
     private Long id;
 
     @Column(name = "name", nullable = false)
+    @NotEmpty
     private String name;
 
     @Column(name = "password", nullable = false)
+    @NotEmpty
     private String password;
 
     @Embedded
