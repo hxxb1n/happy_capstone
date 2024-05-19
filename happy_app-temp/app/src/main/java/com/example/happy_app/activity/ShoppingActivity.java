@@ -78,7 +78,6 @@ public class ShoppingActivity extends AppCompatActivity implements ProductListFr
                     finish();
                 }
             }
-
             @Override
             public void onFailure(Call<Member> call, Throwable t) {
                 finish();
@@ -106,7 +105,7 @@ public class ShoppingActivity extends AppCompatActivity implements ProductListFr
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-            tab.setText(position == 0 ? "Products" : "Details");
+            tab.setText(position == 0 ? "제품" : "상세정보");
         }).attach();
     }
 

@@ -1,5 +1,6 @@
 package com.example.happy_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.happy_app.activity.ShoppingActivity;
 import com.example.happy_app.api.ApiClient;
 import com.example.happy_app.api.OrderApi;
 import com.example.happy_app.api.ProductApi;
@@ -117,6 +119,15 @@ public class ProductDetailFragment extends Fragment {
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful() && "1".equals(response.body())) {
                     Toast.makeText(getContext(), "주문이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+
+                    // 쇼핑액티비티를 다시 호출
+                    Intent intent = new Intent(getActivity(), ShoppingActivity.class);
+                    intent.putExtra("memberId", memberId);
+                    intent.putExtra("memberName", getArguments().getString("memberName"));
+                    startActivity(intent);
+
+                    editTextProductQuantity.setText("1");
+
                 } else {
                     Toast.makeText(getContext(), "내 정보에서 먼저 주소를 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
