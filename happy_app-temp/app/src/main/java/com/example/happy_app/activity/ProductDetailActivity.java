@@ -11,6 +11,8 @@ import com.example.happy_app.R;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
+    private static final String TAG = "ProductDetailActivity";
+
     private TextView textViewProductName;
     private TextView textViewProductDescription;
     private TextView textViewProductPrice;
@@ -20,27 +22,36 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
+        initViews();
+        setupToolbar();
+        populateProductDetails();
+    }
+
+    private void initViews() {
+        textViewProductName = findViewById(R.id.textViewProductName);
+        textViewProductDescription = findViewById(R.id.textViewProductDescription);
+        textViewProductPrice = findViewById(R.id.textViewProductPrice);
+    }
+
+    private void setupToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("상품 상세 정보");
         }
+    }
 
-        textViewProductName = findViewById(R.id.textViewProductName);
-        textViewProductDescription = findViewById(R.id.textViewProductDescription);
-        textViewProductPrice = findViewById(R.id.textViewProductPrice);
-
+    private void populateProductDetails() {
         String productName = getIntent().getStringExtra("productName");
         String productDescription = getIntent().getStringExtra("productDescription");
         int productPrice = getIntent().getIntExtra("productPrice", 0);
 
-        textViewProductName.setText(productName);
-        textViewProductDescription.setText(productDescription);
+        textViewProductName.setText(productName != null ? productName : "N/A");
+        textViewProductDescription.setText(productDescription != null ? productDescription : "N/A");
         textViewProductPrice.setText(String.valueOf(productPrice));
     }
 
-    // 뒤로가기 버튼
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

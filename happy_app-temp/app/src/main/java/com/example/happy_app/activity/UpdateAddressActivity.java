@@ -2,7 +2,6 @@ package com.example.happy_app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,6 +20,8 @@ import retrofit2.Response;
 
 public class UpdateAddressActivity extends AppCompatActivity {
 
+    private static final String TAG = "UpdateAddressActivity";
+
     private EditText editTextCity, editTextStreet, editTextZip;
     private Button buttonSubmitAddress;
     private long memberId;
@@ -30,20 +31,27 @@ public class UpdateAddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_address);
 
+        initViews();
+        memberId = getIntent().getLongExtra("memberId", -1);
+
+        if (memberId == -1) {
+            showToast("Invalid member ID");
+            finish();
+            return;
+        }
+
+        setupListeners();
+    }
+
+    private void initViews() {
         editTextCity = findViewById(R.id.editTextCity);
         editTextStreet = findViewById(R.id.editTextStreet);
         editTextZip = findViewById(R.id.editTextZip);
         buttonSubmitAddress = findViewById(R.id.buttonSubmitAddress);
+    }
 
-        // Intent로부터 유저 정보 받기
-        memberId = getIntent().getLongExtra("memberId", -1);
-
-        buttonSubmitAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateAddress();
-            }
-        });
+    private void setupListeners() {
+        buttonSubmitAddress.setOnClickListener(v -> updateAddress());
     }
 
     private void updateAddress() {
@@ -51,8 +59,8 @@ public class UpdateAddressActivity extends AppCompatActivity {
         String street = editTextStreet.getText().toString();
         String zip = editTextZip.getText().toString();
 
-        if (city.isEmpty() || street.isEmpty() || zip.isEmpty()) {
-            Toast.makeText(this, "모든 필드를 입력해 주세요.", Toast.LENGTH_SHORT).show();
+        if (!validateInputs(city, street, zip)) {
+            showToast("모든 필드를 입력해 주세요.");
             return;
         }
 
@@ -65,20 +73,32 @@ public class UpdateAddressActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(UpdateAddressActivity.this, "주소 업데이트 성공", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(UpdateAddressActivity.this, ShoppingActivity.class);
-                    intent.putExtra("memberId", memberId);
-                    startActivity(intent);
-                    finish(); // Update success, close this activity and return to profile
+                    showToast("주소 업데이트 성공");
+                    navigateToShoppingActivity();
                 } else {
-                    Toast.makeText(UpdateAddressActivity.this, "주소 업데이트 실패", Toast.LENGTH_SHORT).show();
+                    showToast("주소 업데이트 실패");
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(UpdateAddressActivity.this, "서버 연결 실패", Toast.LENGTH_SHORT).show();
+                showToast("서버 연결 실패");
             }
         });
+    }
+
+    private boolean validateInputs(String city, String street, String zip) {
+        return !city.isEmpty() && !street.isEmpty() && !zip.isEmpty();
+    }
+
+    private void navigateToShoppingActivity() {
+        Intent intent = new Intent(UpdateAddressActivity.this, ShoppingActivity.class);
+        intent.putExtra("memberId", memberId);
+        startActivity(intent);
+        finish();
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(UpdateAddressActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 }

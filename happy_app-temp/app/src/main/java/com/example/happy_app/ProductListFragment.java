@@ -26,6 +26,8 @@ import retrofit2.Response;
 
 public class ProductListFragment extends Fragment {
 
+    private static final String TAG = "ProductListFragment";
+
     private OnProductSelectedListener listener;
     private RecyclerView recyclerView;
     private ProductAdapter adapter;
@@ -40,7 +42,7 @@ public class ProductListFragment extends Fragment {
         if (context instanceof OnProductSelectedListener) {
             listener = (OnProductSelectedListener) context;
         } else {
-            throw new RuntimeException(context.toString());
+            throw new RuntimeException(context.toString() + " must implement OnProductSelectedListener");
         }
     }
 
@@ -48,10 +50,18 @@ public class ProductListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product_list, container, false);
-        recyclerView = view.findViewById(R.id.recyclerViewProducts);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        initViews(view);
+        setupRecyclerView();
         loadProducts();
         return view;
+    }
+
+    private void initViews(View view) {
+        recyclerView = view.findViewById(R.id.recyclerViewProducts);
+    }
+
+    private void setupRecyclerView() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private void loadProducts() {
@@ -65,14 +75,18 @@ public class ProductListFragment extends Fragment {
                     adapter = new ProductAdapter(products, getContext(), listener);
                     recyclerView.setAdapter(adapter);
                 } else {
-                    Toast.makeText(getContext(), "Failed to load products", Toast.LENGTH_SHORT).show();
+                    showToast("Failed to load products");
                 }
             }
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed to connect to server", Toast.LENGTH_SHORT).show();
+                showToast("Failed to connect to server");
             }
         });
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

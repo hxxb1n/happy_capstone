@@ -45,10 +45,9 @@ public class ProductDetailFragment extends Fragment {
         buttonAddToCart = view.findViewById(R.id.buttonAddToCart);
         buttonBuyNow = view.findViewById(R.id.buttonBuyNow);
 
-        // 사용자 아이디, 아이템 아이디 가져오기
         if (getArguments() != null) {
-            productId = getArguments().getLong("productId", -1);
             memberId = getArguments().getLong("memberId", -1);
+            productId = getArguments().getLong("productId", -1);
             if (productId != -1 && memberId != -1) {
                 loadProductDetails(productId);
             } else {
@@ -67,7 +66,7 @@ public class ProductDetailFragment extends Fragment {
         loadProductDetails(productId);
     }
 
-    public void loadProductDetails(long productId) {
+    private void loadProductDetails(long productId) {
         ProductApi apiService = ApiClient.getProductApiService();
         Call<Product> call = apiService.getProductById(productId);
         call.enqueue(new Callback<Product>() {
@@ -77,7 +76,7 @@ public class ProductDetailFragment extends Fragment {
                     Product product = response.body();
                     textViewProductName.setText(product.getName());
                     textViewProductDescription.setText(product.getDescription());
-                    textViewProductPrice.setText(String.valueOf(product.getPrice()));
+                    textViewProductPrice.setText(String.format("%s ₩", product.getPrice()));
                 } else {
                     Toast.makeText(getContext(), "Failed to load product details", Toast.LENGTH_SHORT).show();
                 }
@@ -98,7 +97,6 @@ public class ProductDetailFragment extends Fragment {
         }
 
         int quantity = Integer.parseInt(quantityStr);
-        // 장바구니에 추가하는 로직
         Toast.makeText(getContext(), "장바구니에 추가되었습니다.", Toast.LENGTH_SHORT).show();
     }
 
@@ -112,13 +110,12 @@ public class ProductDetailFragment extends Fragment {
         int quantity = Integer.parseInt(quantityStr);
         OrderDto orderDto = new OrderDto(memberId, productId, quantity);
 
-        // 서버로 주문 정보를 전송
         OrderApi apiService = ApiClient.getOrderApiService();
         Call<String> call = apiService.createOrder(orderDto);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                if ("1".equals(response.body())) {
+                if (response.isSuccessful() && "1".equals(response.body())) {
                     Toast.makeText(getContext(), "주문이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getContext(), "내 정보에서 먼저 주소를 입력해주세요", Toast.LENGTH_SHORT).show();
