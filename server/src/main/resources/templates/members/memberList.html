@@ -8,11 +8,12 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>#</th>
+                <th>아이디</th>
                 <th>이름</th>
                 <th>도시</th>
                 <th>주소</th>
                 <th>우편번호</th>
+                <th>권한</th>
             </tr>
             </thead>
             <tbody>
@@ -21,7 +22,8 @@
                 <td th:text="${member.name}"></td>
                 <td th:text="${member.address?.city}"></td>
                 <td th:text="${member.address?.street}"></td>
-                <td th:text="${member.address?.zipcode}"></td>
+                <td th:text="${member.address?.zip}"></td>
+                <td th:text="${member.authority}"></td>
             </tr>
             </tbody>
         </table>

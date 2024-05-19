@@ -21,4 +21,20 @@ public class ApiClient {
         return getRetrofitInstance().create(MemberApi.class);
     }
 
+    public static ProductApi getProductApiService() {
+        return getRetrofitInstance().create(ProductApi.class);
+    }
+
+    public static OrderApi getOrderApiService() {
+        return getRetrofitInstance().create(OrderApi.class);
+    }
+
+    public static ProfileApi getProfileApiService() {
+        return getRetrofitInstance().create(ProfileApi.class);
+    }
+
+    public static MemberApi getMemberApiService() {
+        return getRetrofitInstance().create(MemberApi.class);
+    }
+
 }

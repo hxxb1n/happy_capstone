@@ -9,24 +9,54 @@
         android:id="@+id/textViewProductName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Product Name"
+        android:text="상품명"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewProductDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Product Description"
-        android:layout_marginBottom="16dp"/>
+        android:text="상품 설명"
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:id="@+id/textViewProductPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Product Price"
-        android:layout_marginBottom="16dp"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="20sp"/>
+        android:text="가격"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/editTextProductQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="수량 입력"
+        android:inputType="number"
+        android:layout_marginTop="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/buttonAddToCart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="장바구니에 넣기"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/buttonBuyNow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="구매하기" />
+    </LinearLayout>
+
 </LinearLayout>

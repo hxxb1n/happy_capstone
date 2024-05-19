@@ -8,32 +8,23 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.example.happy_app.ProductDetailFragment;
 import com.example.happy_app.ProductListFragment;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ShoppingPagerAdapter extends FragmentStateAdapter {
 
-    private final Map<Integer, Fragment> fragmentMap = new HashMap<>();
+    private final Fragment[] fragments;
 
-    public ShoppingPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
+    public ShoppingPagerAdapter(@NonNull FragmentActivity fragmentActivity, ProductDetailFragment productDetailFragment) {
         super(fragmentActivity);
-        fragmentMap.put(0, new ProductListFragment());
-        fragmentMap.put(1, new ProductDetailFragment());
+        fragments = new Fragment[] { new ProductListFragment(), productDetailFragment };
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return fragmentMap.get(position);
+        return fragments[position];
     }
 
     @Override
     public int getItemCount() {
-        return fragmentMap.size();
-    }
-
-    public void setFragment(int position, Fragment fragment) {
-        fragmentMap.put(position, fragment);
-        notifyItemChanged(position);
+        return fragments.length;
     }
 }

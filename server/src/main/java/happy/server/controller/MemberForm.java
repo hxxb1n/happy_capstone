@@ -1,18 +1,17 @@
 package happy.server.controller;
 
-import jakarta.validation.constraints.NotEmpty;
-import lombok.Getter;
-import lombok.Setter;
+import happy.server.entity.Authority;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
-@Getter
-@Setter
+
+@Data
 public class MemberForm {
 
-    @NotEmpty(message = "회원 이름은 필수입니다.")
+    @NotNull(message = "전화번호를 입력해 주세요.")
+    private Long id;
     private String name;
-
-    private String city;
-    private String street;
-    private String zip;
+    private String password;
+    private Authority authority;
 
 }

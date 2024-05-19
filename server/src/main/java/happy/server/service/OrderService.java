@@ -4,6 +4,7 @@ import happy.server.entity.*;
 import happy.server.repository.ItemRepository;
 import happy.server.repository.MemberRepository;
 import happy.server.repository.OrderRepository;
+import happy.server.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,5 +45,9 @@ public class OrderService {
     }
 
     // 주문 검색
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByString(orderSearch);
+    }
+
 
 }

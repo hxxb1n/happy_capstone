@@ -1,16 +1,14 @@
 package happy.server.controller;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-public class BookForm {
+@Data
+public class ItemForm {
 
     private Long id;
-
     private String name;
     private int price;
     private int stockQuantity;
+    private String description;
 
 }

@@ -20,8 +20,12 @@ public class MemberRepository {
         em.persist(member);
     }
 
-    public Member fineOne(final Long id) {
-        return em.find(Member.class, id);
+    public void update(final Member member) {
+        em.merge(member);
+    }
+
+    public Member fineOne(Long memberId) {
+        return em.find(Member.class, memberId);
     }
 
     public Member findById(final long id) {

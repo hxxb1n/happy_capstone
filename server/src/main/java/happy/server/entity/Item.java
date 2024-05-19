@@ -18,6 +18,7 @@ public class Item {
     private String name;
     private int price;
     private int stockQuantity;
+    private String description;
 
     // 재고 수량 증가
     public void addStockQuantity(int quantity) {

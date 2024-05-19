@@ -45,6 +45,8 @@
         <activity android:name=".activity.OrderListActivity">
         </activity>
 
+        <activity android:name=".activity.UpdateAddressActivity">
+        </activity>
 
 
     </application>
