@@ -52,8 +52,6 @@ public class ProductDetailFragment extends Fragment {
             productId = getArguments().getLong("productId", -1);
             if (productId != -1 && memberId != -1) {
                 loadProductDetails(productId);
-            } else {
-                Toast.makeText(getContext(), "잘못된 상품 정보입니다.", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -75,7 +73,6 @@ public class ProductDetailFragment extends Fragment {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    editTextProductQuantity.setText("");
                     Product product = response.body();
                     textViewProductName.setText(product.getName());
                     textViewProductDescription.setText(product.getDescription());
@@ -127,7 +124,7 @@ public class ProductDetailFragment extends Fragment {
                     intent.putExtra("memberName", getArguments().getString("memberName"));
                     startActivity(intent);
 
-                    editTextProductQuantity.setText("1");
+                    editTextProductQuantity.setText("");
 
                 } else {
                     Toast.makeText(getContext(), "내 정보에서 먼저 주소를 입력해주세요", Toast.LENGTH_SHORT).show();

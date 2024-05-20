@@ -53,11 +53,34 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void onSignUpButtonClick(View v) {
-        Long id = Long.valueOf(editTextId.getText().toString());
-        String name = editTextName.getText().toString();
-        String password = editTextPassword.getText().toString();
+        String idStr = editTextId.getText().toString().trim();
+        String name = editTextName.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
 
-        CreateMemberRequest request = new CreateMemberRequest(id, name, password);
+        if (idStr.isEmpty() || name.isEmpty() || password.isEmpty()) {
+            showToast("사용할 아이디나 비밀번호 이름을 입력해 주세요.");
+            return;
+        }
+
+        if (!idStr.matches("\\d{11}")) {
+            showToast("전화번호를 정확히 입력해 주세요.");
+            return;
+        }
+
+        if (name.matches(".*\\d+.*")) {
+            showToast("이름에는 숫자가 들어갈 수 없습니다.");
+            return;
+        }
+
+        if (password.length() < 6) {
+            showToast("비밀번호는 6자리 이상이어야 합니다.");
+            return;
+        }
+
+        // 전화번호의 첫 번째 0 제거
+        String formattedPhoneNumber = idStr.substring(1);
+
+        CreateMemberRequest request = new CreateMemberRequest(Long.valueOf(formattedPhoneNumber), name, password);
         Gson gson = new Gson();
         String json = gson.toJson(request);
 
