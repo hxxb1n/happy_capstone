@@ -102,6 +102,7 @@ public class ShoppingActivity extends AppCompatActivity implements ProductListFr
     private void setupViewPager() {
         pagerAdapter = new ShoppingPagerAdapter(this, memberId);
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setOffscreenPageLimit(2);
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
