@@ -61,17 +61,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if (!idString.matches("\\d{11}")) {
-            showToast("전화번호를 정확히 입력해 주세요.");
-            return;
-        }
-
-        // 전화번호 첫 번째 0 제거
-        String formattedPhoneNumber = idString.substring(1);
-
         long id;
         try {
-            id = Long.parseLong(formattedPhoneNumber);
+            id = Long.parseLong(idString);
         } catch (NumberFormatException e) {
             showToast("유효한 아이디를 입력해 주세요.");
             return;
