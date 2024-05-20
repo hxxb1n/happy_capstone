@@ -73,6 +73,7 @@ public class ProductDetailFragment extends Fragment {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    editTextProductQuantity.setText("");
                     Product product = response.body();
                     textViewProductName.setText(product.getName());
                     textViewProductDescription.setText(product.getDescription());
