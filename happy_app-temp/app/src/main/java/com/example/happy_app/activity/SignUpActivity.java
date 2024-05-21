@@ -108,10 +108,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void handleSignUpSuccess(CreateMemberResponse responseBody, CreateMemberRequest request) {
         if (Objects.equals(responseBody.getName(), request.getName())) {
-            showToast("회원 가입을 완료했어요.: " + responseBody.getName());
+            showToast("회원 가입을 완료했어요 " + responseBody.getName() + "님");
             navigateToMainActivity();
         } else if (Objects.equals(responseBody.getName(), "1")) {
-            showToast(responseBody.getId() + " 는 이미 중복된 아이디예요.");
+            showToast("0" + request.getId() + "은 이미 중복된 아이디예요.");
         } else {
             showToast("기타 메시지: " + responseBody.getName());
         }
