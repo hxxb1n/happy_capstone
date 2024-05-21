@@ -1,11 +1,10 @@
-package com.example.happy_app.model;
+package com.example.happy_app.dto;
+
+import com.example.happy_app.model.Address;
 
 public class ProfileUpdateRequest {
     private long memberId;
     private Address address;
-
-    public ProfileUpdateRequest() {
-    }
 
     public ProfileUpdateRequest(long memberId, Address address) {
         this.memberId = memberId;

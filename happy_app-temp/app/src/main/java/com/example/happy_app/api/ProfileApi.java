@@ -1,6 +1,6 @@
 package com.example.happy_app.api;
 
-import com.example.happy_app.model.ProfileUpdateRequest;
+import com.example.happy_app.dto.ProfileUpdateRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

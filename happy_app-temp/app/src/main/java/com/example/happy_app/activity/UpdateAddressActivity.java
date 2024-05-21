@@ -12,7 +12,7 @@ import com.example.happy_app.R;
 import com.example.happy_app.api.ApiClient;
 import com.example.happy_app.api.ProfileApi;
 import com.example.happy_app.model.Address;
-import com.example.happy_app.model.ProfileUpdateRequest;
+import com.example.happy_app.dto.ProfileUpdateRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;
