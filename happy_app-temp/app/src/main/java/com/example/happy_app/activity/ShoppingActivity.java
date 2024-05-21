@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -46,16 +47,20 @@ public class ShoppingActivity extends AppCompatActivity implements ProductListFr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping);
-
         initViews();
         memberId = getIntent().getLongExtra("memberId", -1);
-
         if (memberId == -1) {
             finish();
             return;
         }
-
         fetchMemberDetails(memberId);
+
+        // 뒤로가기 동작 무시, 로그인했는데 슬라이드 했을 때 로그아웃 되면 안 되니까
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+            }
+        });
     }
 
     private void initViews() {

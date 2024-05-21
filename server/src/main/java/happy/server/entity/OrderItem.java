@@ -29,11 +29,11 @@ public class OrderItem {
     private int orderPrice;
     private int count;
 
-    // 생성
+    // 주문할 아이템 생성
     public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
         OrderItem orderItem = new OrderItem();
         orderItem.setItem(item);
-        orderItem.setOrderPrice(orderPrice);
+        orderItem.setOrderPrice(orderPrice * count);
         orderItem.setCount(count);
         item.removeStockQuantity(count);
         return orderItem;
