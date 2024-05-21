@@ -4,11 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="2dp"
-    android:layout_marginRight="2dp"
     android:background="@color/colorBackground"
     android:orientation="vertical"
-    android:padding="4dp"
     tools:context=".activity.ShoppingActivity">
 
     <TextView
@@ -16,22 +13,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="0dp"
         android:text="회원님"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textStyle="normal" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonProfile"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
@@ -41,7 +39,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonOrderList"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
@@ -51,11 +49,11 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonSmartController"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/colorPrimary"
-            android:text="출입문" />
+            android:text="출입문"
+            android:textColor="@color/colorPrimary" />
 
     </LinearLayout>
 
@@ -63,7 +61,7 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="#e9e9e9"
+        android:background="#e5e5e5"
         app:tabIndicatorColor="@color/colorPrimary"
         app:tabSelectedTextColor="@color/colorPrimaryDark"
         app:tabTextColor="@color/colorPrimary" />
@@ -72,6 +70,5 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
         android:layout_weight="1" />
 </LinearLayout>

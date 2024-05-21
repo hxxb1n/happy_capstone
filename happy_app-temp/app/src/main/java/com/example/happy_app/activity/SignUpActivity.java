@@ -68,12 +68,12 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         if (name.matches(".*\\d+.*")) {
-            showToast("이름에는 숫자가 들어갈 수 없습니다.");
+            showToast("이름에는 숫자가 들어갈 수 없어요.");
             return;
         }
 
         if (password.length() < 6) {
-            showToast("비밀번호는 6자리 이상이어야 합니다.");
+            showToast("비밀번호는 6자리 이상이어야 해요.");
             return;
         }
 
@@ -108,10 +108,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void handleSignUpSuccess(CreateMemberResponse responseBody, CreateMemberRequest request) {
         if (Objects.equals(responseBody.getName(), request.getName())) {
-            showToast("회원 가입 완료: " + responseBody.getName());
+            showToast("회원 가입을 완료했어요.: " + responseBody.getName());
             navigateToMainActivity();
         } else if (Objects.equals(responseBody.getName(), "1")) {
-            showToast(responseBody.getId() + " 는 이미 중복된 아이디 입니다.");
+            showToast(responseBody.getId() + " 는 이미 중복된 아이디예요.");
         } else {
             showToast("기타 메시지: " + responseBody.getName());
         }

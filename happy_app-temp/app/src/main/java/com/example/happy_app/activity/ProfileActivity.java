@@ -36,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
         memberId = getIntent().getLongExtra("memberId", -1);
 
         if (memberId == -1) {
-            showToast("Invalid member ID");
+            showToast("세션 처리 실패");
             finish();
             return;
         }
@@ -66,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     handleMemberResponse(response.body());
                 } else {
-                    showToast("Failed to load member details");
+                    showToast("사용자 정보 불러오기 실패");
                 }
             }
 
@@ -80,20 +80,20 @@ public class ProfileActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void handleMemberResponse(Member member) {
         Address address = member.getAddress();
-        String city = address != null && address.getCity() != null ? address.getCity() : "N/A";
-        String street = address != null && address.getStreet() != null ? address.getStreet() : "N/A";
-        String zip = address != null && address.getZip() != null ? address.getZip() : "N/A";
+        String city = address != null && address.getCity() != null ? address.getCity() : "주소가 없어요.";
+        String street = address != null && address.getStreet() != null ? address.getStreet() : "";
+        String zip = address != null && address.getZip() != null ? address.getZip() : "";
 
         textViewProfile.setText("회원 이름: " + member.getName() +
-                "\n회원 ID: " + member.getId() +
+                "\n아이디: 0" + member.getId() +
                 "\n도시: " + city +
-                "\n거리: " + street +
+                "\n세부주소: " + street +
                 "\n우편번호: " + zip +
                 "\n권한: " + member.getAuthority());
     }
 
     private void handleLoadMemberFailure(Throwable t) {
-        showToast("Failed to connect to server");
+        showToast("서버 연결 실패");
     }
 
     private void navigateToUpdateAddressActivity() {

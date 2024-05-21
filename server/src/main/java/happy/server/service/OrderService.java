@@ -1,5 +1,6 @@
 package happy.server.service;
 
+import happy.server.dto.OrderResponseDto;
 import happy.server.entity.*;
 import happy.server.repository.ItemRepository;
 import happy.server.repository.MemberRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -49,5 +51,19 @@ public class OrderService {
         return orderRepository.findAllByString(orderSearch);
     }
 
+    public List<OrderResponseDto> findOrdersDtoById(Long id) {
+        List<Order> orders = orderRepository.findAllById(id);
+        return orders.stream()
+                .flatMap(order -> order.getOrderItems().stream()
+                        .map(orderItem -> new OrderResponseDto(
+                                order.getId(),
+                                order.getOrderDate(),
+                                orderItem.getItem().getName(),
+                                orderItem.getCount(),
+                                orderItem.getOrderPrice(),
+                                order.getStatus().toString()
+                        )))
+                .collect(Collectors.toList());
+    }
 
 }

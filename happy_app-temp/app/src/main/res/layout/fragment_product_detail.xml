@@ -3,14 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
     android:padding="8dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:background="@color/colorBackground"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp">
 
@@ -34,10 +32,10 @@
                 android:id="@+id/textViewProductDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="6dp"
                 android:text="상품 설명"
                 android:textColor="?android:attr/textColorSecondary"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textViewProductPrice"
@@ -46,7 +44,7 @@
                 android:layout_marginTop="30dp"
                 android:text="가격"
                 android:textColor="@android:color/holo_red_dark"
-                android:textSize="24dp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -55,15 +53,15 @@
                 android:layout_marginTop="6dp"
                 android:text="배송비 무료"
                 android:textColor="@android:color/holo_green_dark"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/editTextProductQuantity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="6dp"
                 android:background="?attr/editTextBackground"
-                android:hint="수량 입력"
+                android:hint="구매할 개수 입력"
                 android:inputType="number" />
 
             <LinearLayout
@@ -82,7 +80,8 @@
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:text="장바구니에 넣기"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/buttonBuyNow"
@@ -91,7 +90,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="구매하기"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
             </LinearLayout>
 
         </LinearLayout>
