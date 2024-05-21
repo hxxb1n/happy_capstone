@@ -1,7 +1,10 @@
 package com.example.happy_app.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -113,6 +116,17 @@ public class ShoppingActivity extends AppCompatActivity implements ProductListFr
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             tab.setText(position == 0 ? "제품" : "상세정보");
         }).attach();
+
+        // 탭 클릭할 때 무시하기
+        disableTabClicks(tabLayout);
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void disableTabClicks(TabLayout tabLayout) {
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            View tab = ((ViewGroup) tabLayout.getChildAt(0)).getChildAt(i);
+            tab.setOnTouchListener((v, event) -> true);
+        }
     }
 
     private void setupButtons() {

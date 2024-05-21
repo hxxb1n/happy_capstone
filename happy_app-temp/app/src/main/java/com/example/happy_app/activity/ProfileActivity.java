@@ -24,6 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private TextView textViewProfile;
     private Button buttonUpdateAddress;
+    private Button buttonLogout;
     private long memberId;
 
     @Override
@@ -47,10 +48,12 @@ public class ProfileActivity extends AppCompatActivity {
     private void initViews() {
         textViewProfile = findViewById(R.id.textViewProfile);
         buttonUpdateAddress = findViewById(R.id.buttonUpdateAddress);
+        buttonLogout = findViewById(R.id.buttonLogout);
     }
 
     private void setupListeners() {
         buttonUpdateAddress.setOnClickListener(v -> navigateToUpdateAddressActivity());
+        buttonLogout.setOnClickListener(v -> logout());
     }
 
     private void loadMemberDetails(long memberId) {
@@ -102,4 +105,13 @@ public class ProfileActivity extends AppCompatActivity {
     private void showToast(String message) {
         Toast.makeText(ProfileActivity.this, message, Toast.LENGTH_SHORT).show();
     }
+
+    private void logout() {
+        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+        showToast("로그아웃 성공");
+    }
+
 }
