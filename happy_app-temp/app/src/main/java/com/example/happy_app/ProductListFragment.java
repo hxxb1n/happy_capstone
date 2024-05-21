@@ -42,7 +42,7 @@ public class ProductListFragment extends Fragment {
         if (context instanceof OnProductSelectedListener) {
             listener = (OnProductSelectedListener) context;
         } else {
-            throw new RuntimeException(context.toString() + " must implement OnProductSelectedListener");
+            throw new RuntimeException(context.toString());
         }
     }
 
@@ -75,13 +75,13 @@ public class ProductListFragment extends Fragment {
                     adapter = new ProductAdapter(products, getContext(), listener);
                     recyclerView.setAdapter(adapter);
                 } else {
-                    showToast("Failed to load products");
+                    showToast("상품 불러오기 실패");
                 }
             }
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
-                showToast("Failed to connect to server");
+                showToast("서버 연결 실패");
             }
         });
     }

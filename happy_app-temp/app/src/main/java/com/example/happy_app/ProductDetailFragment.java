@@ -78,13 +78,13 @@ public class ProductDetailFragment extends Fragment {
                     textViewProductDescription.setText(product.getDescription());
                     textViewProductPrice.setText(String.format("%s ₩", product.getPrice()));
                 } else {
-                    Toast.makeText(getContext(), "Failed to load product details", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "상품 정보 불러오기 실패", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Product> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed to connect to server", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "서버연결 실패", Toast.LENGTH_SHORT).show();
             }
         });
     }
