@@ -51,6 +51,7 @@ public class OrderService {
         return orderRepository.findAllByString(orderSearch);
     }
 
+    // 엔티티 바로 응답하면 예외 터져서 dto로 응답하게 만들었음
     public List<OrderResponseDto> findOrdersDtoById(Long id) {
         List<Order> orders = orderRepository.findAllById(id);
         return orders.stream()
