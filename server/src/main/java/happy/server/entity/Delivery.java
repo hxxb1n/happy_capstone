@@ -24,7 +24,7 @@ public class Delivery {
     private DeliveryStatus status;
 
     // 출입 바코드 테이블
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "parcel_id")
     private Parcel parcel;
 

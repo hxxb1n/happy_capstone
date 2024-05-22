@@ -96,9 +96,9 @@ public class ShoppingActivity extends AppCompatActivity implements ProductListFr
     private void handleMemberResponse(Member member) {
         Address address = member.getAddress();
         memberName = member.getName();
-        memberCity = (address != null && address.getCity() != null) ? address.getCity() : "N/A";
-        memberStreet = (address != null && address.getStreet() != null) ? address.getStreet() : "N/A";
-        memberZip = (address != null && address.getZip() != null) ? address.getZip() : "N/A";
+        memberCity = (address != null && address.getCity() != null) ? address.getCity() : "";
+        memberStreet = (address != null && address.getStreet() != null) ? address.getStreet() : "";
+        memberZip = (address != null && address.getZip() != null) ? address.getZip() : "";
         memberAuthority = member.getAuthority();
 
         textViewMemberName.setText(memberName + "님, 환영합니다!");
@@ -108,7 +108,7 @@ public class ShoppingActivity extends AppCompatActivity implements ProductListFr
     }
 
     private void setupViewPager() {
-        pagerAdapter = new ShoppingPagerAdapter(this, memberId);
+        pagerAdapter = new ShoppingPagerAdapter(this, memberId, memberCity);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(2);
 

@@ -43,6 +43,8 @@ dependencies {
     implementation libs.gson
     implementation libs.viewpager2
     implementation libs.material.v140
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation libs.material
+    implementation libs.zxing.android.embedded
+    implementation libs.core
 
 }

@@ -11,7 +11,6 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Parcel {
 
     @Id
@@ -24,8 +23,8 @@ public class Parcel {
 
     private String trackingNumber;
 
-    public void generateTrackingNumber() {
-        trackingNumber = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 12);
+    public Parcel() {
+        this.trackingNumber = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 12);
     }
 
 }

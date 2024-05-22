@@ -35,6 +35,7 @@ public class ProductDetailFragment extends Fragment {
     private Button buttonBuyNow;
     private long productId;
     private long memberId;
+    private String memberCity;
 
     @Nullable
     @Override
@@ -50,6 +51,7 @@ public class ProductDetailFragment extends Fragment {
         if (getArguments() != null) {
             memberId = getArguments().getLong("memberId", -1);
             productId = getArguments().getLong("productId", -1);
+            memberCity = getArguments().getString("memberCity", "");
             if (productId != -1 && memberId != -1) {
                 loadProductDetails(productId);
             }
@@ -104,6 +106,11 @@ public class ProductDetailFragment extends Fragment {
         String quantityStr = editTextProductQuantity.getText().toString();
         if (quantityStr.isEmpty()) {
             Toast.makeText(getContext(), "수량을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (memberCity.isEmpty()) {
+            Toast.makeText(getContext(), "내 정보에서 먼저 주소를 설정해주세요.", Toast.LENGTH_SHORT).show();
             return;
         }
 

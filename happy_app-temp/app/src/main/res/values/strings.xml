@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">happy_app</string>
+    <string name="barcode_image">Barcode Image</string>
 </resources>

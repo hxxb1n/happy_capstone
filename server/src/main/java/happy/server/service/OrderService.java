@@ -29,7 +29,11 @@ public class OrderService {
         Item item = itemRepository.fineOne(itemId);
         // 배송정보 만들기
         Delivery delivery = new Delivery();
+        delivery.setStatus(DeliveryStatus.READY);
         delivery.setAddress(member.getAddress());
+        // 바코드 정보 만들기
+        Parcel parcel = new Parcel();
+        delivery.setParcel(parcel);
         // 주문상품 만들기
         OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
         // 주문 생성

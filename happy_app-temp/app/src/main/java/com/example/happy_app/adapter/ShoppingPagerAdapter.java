@@ -14,10 +14,12 @@ public class ShoppingPagerAdapter extends FragmentStateAdapter {
 
     private static final int TAB_COUNT = 2;
     private final long memberId;
+    private String memberCity;
 
-    public ShoppingPagerAdapter(@NonNull FragmentActivity fragmentActivity, long memberId) {
+    public ShoppingPagerAdapter(@NonNull FragmentActivity fragmentActivity, long memberId, String memberCity) {
         super(fragmentActivity);
         this.memberId = memberId;
+        this.memberCity = memberCity;
     }
 
     @NonNull
@@ -29,6 +31,7 @@ public class ShoppingPagerAdapter extends FragmentStateAdapter {
             ProductDetailFragment fragment = new ProductDetailFragment();
             Bundle args = new Bundle();
             args.putLong("memberId", memberId);
+            args.putString("memberCity", memberCity);
             fragment.setArguments(args);
             return fragment;
         }
