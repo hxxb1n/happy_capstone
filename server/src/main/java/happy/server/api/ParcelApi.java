@@ -25,7 +25,7 @@ public class ParcelApi {
 
     @PostMapping("/api/myOrderParcelTrackingNumber")
     public ParcelDto myOrderParcelTrackingNumber(@RequestBody OrderRequestDto orderRequestDto) {
-        log.info(orderRequestDto.toString());
+        log.info("Barcode information call:{}", orderRequestDto.getOrderId());
         String trackingNumber = parcelService.myOrderParcelTrackingNumber(orderRequestDto.getOrderId());
         return new ParcelDto(trackingNumber);
     }
@@ -44,8 +44,11 @@ public class ParcelApi {
         if (find != null) {
             Order order = orderRepository.findOrderIdByTrackingNumber(find.getTrackingNumber());
             order.complete();
+            log.info("order number:{} -> delivery complete", order.getId());
             parcelRepository.updateParcelStatusToExpired(trackingNumber);
+            log.info("barcode Expired: {}", find.getTrackingNumber());
             orderRepository.save(order);
+            log.info("door open");
             return ResponseEntity.ok(true);
         } else {
             return ResponseEntity.status(404).body(false);

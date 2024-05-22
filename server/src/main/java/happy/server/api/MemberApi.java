@@ -29,11 +29,11 @@ public class MemberApi {
         member.setAuthority(Authority.USER);
         boolean b = memberService.validateDuplicateMember(member);
         if (!b) {
-            log.info("중복된 아이디로 가입 시도");
+            log.info("Attempting to sign up with a duplicate ID: {}", member.getId());
             return new CreateMemberResponse("1");
         } else {
             memberService.join(member);
-            log.info("회원 가입 완료: {}", member.getName());
+            log.info("member join complete: {}", member.getName());
             return new CreateMemberResponse(member.getName());
         }
     }
@@ -42,10 +42,10 @@ public class MemberApi {
     public CreateMemberResponse login(@RequestBody @Valid CreateMemberRequest request) {
         Member loginMember = memberService.MemberLogin(request.getId(), request.getPassword());
         if (loginMember != null) {
-            log.info("{} 로그인 성공", request.getId());
+            log.info("login completed: {}", request.getId());
             return new CreateMemberResponse(loginMember.getId(), loginMember.getName(), loginMember.getAuthority());
         } else {
-            throw new IllegalStateException("로그인 실패");
+            throw new IllegalStateException("login failed");
         }
     }
 
@@ -57,6 +57,7 @@ public class MemberApi {
     @PutMapping("/api/members/updateAddress")
     public void updateAddress(@RequestBody AddressUpdateRequest addressUpdateRequest) {
         memberService.updateAddress(addressUpdateRequest.getMemberId(), addressUpdateRequest.getAddress());
+        log.info("address change completed ID: {}", addressUpdateRequest.getMemberId());
     }
 
     @Data
