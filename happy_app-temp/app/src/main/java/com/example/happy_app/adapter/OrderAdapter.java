@@ -1,6 +1,7 @@
 package com.example.happy_app.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -84,7 +85,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             orderItemLayout = itemView.findViewById(R.id.orderItemLayout);
 
             buttonBuyNow.setOnClickListener(v -> fetchBarcode(getOrderIdFromText()));
-            buttonOrderCancel.setOnClickListener(v -> cancelOrder(getOrderIdFromText()));
+            buttonOrderCancel.setOnClickListener(v -> showCancelConfirmationDialog(getOrderIdFromText()));
         }
 
         @SuppressLint("SetTextI18n")
@@ -132,6 +133,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                     showToast("요청 지연: " + t.getMessage());
                 }
             });
+        }
+
+        private void showCancelConfirmationDialog(long orderId) {
+            Context context = itemView.getContext();
+            Dialog dialog = new Dialog(context, R.style.CustomDialog);
+            dialog.setContentView(R.layout.dialog_custom_confirmation);
+            Button buttonYes = dialog.findViewById(R.id.buttonYes);
+            Button buttonNo = dialog.findViewById(R.id.buttonNo);
+            buttonYes.setOnClickListener(v -> {
+                cancelOrder(orderId);
+                dialog.dismiss();
+            });
+            buttonNo.setOnClickListener(v -> dialog.dismiss());
+            dialog.show();
         }
 
         private void cancelOrder(long orderId) {
