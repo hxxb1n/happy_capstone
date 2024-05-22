@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.happy_app.R;
@@ -66,6 +68,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         private final TextView textViewOrderPrice;
         private final TextView textViewOrderStatus;
         private final Button buttonBuyNow;
+        private final Button buttonOrderCancel;
+        private final LinearLayout orderItemLayout;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,8 +80,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             textViewOrderPrice = itemView.findViewById(R.id.textViewOrderPrice);
             textViewOrderStatus = itemView.findViewById(R.id.textViewOrderStatus);
             buttonBuyNow = itemView.findViewById(R.id.buttonBuyNow);
+            buttonOrderCancel = itemView.findViewById(R.id.buttonOrderCancel);
+            orderItemLayout = itemView.findViewById(R.id.orderItemLayout);
 
             buttonBuyNow.setOnClickListener(v -> fetchBarcode(getOrderIdFromText()));
+            buttonOrderCancel.setOnClickListener(v -> cancelOrder(getOrderIdFromText()));
         }
 
         @SuppressLint("SetTextI18n")
@@ -88,6 +95,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             textViewItemCount.setText("개수: " + order.getCount());
             textViewOrderPrice.setText("주문 가격: " + order.getOrderPrice() + " ₩");
             textViewOrderStatus.setText("주문 상태: " + order.getOrderStatus());
+
+            if (order.getOrderStatus().equals("CANCEL")) {
+                orderItemLayout.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.colorCancel));
+                buttonBuyNow.setVisibility(View.GONE);
+                buttonOrderCancel.setVisibility(View.GONE);
+            } else {
+                orderItemLayout.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.white));
+                buttonBuyNow.setVisibility(View.VISIBLE);
+                buttonOrderCancel.setVisibility(View.VISIBLE);
+            }
+
         }
 
         private long getOrderIdFromText() {
@@ -105,13 +123,38 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                         String trackingNumber = response.body().getTrackingNumber();
                         showBarcodeDialog(trackingNumber);
                     } else {
-                        showToast("Failed to load barcode");
+                        showToast("바코드 불러오기 실패");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ParcelDto> call, Throwable t) {
-                    showToast("Error fetching barcode: " + t.getMessage());
+                    showToast("요청 지연: " + t.getMessage());
+                }
+            });
+        }
+
+        private void cancelOrder(long orderId) {
+            ApiService apiService = ApiClient.getRetrofitInstance().create(ApiService.class);
+            Call<String> call = apiService.cancelOrder(orderId);
+
+            call.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if (response.isSuccessful() && "1".equals(response.body())) {
+                        textViewOrderStatus.setText("주문 상태: CANCEL");
+                        orderItemLayout.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.colorCancel));
+                        buttonBuyNow.setVisibility(View.GONE);
+                        buttonOrderCancel.setVisibility(View.GONE);
+                        showToast("주문을 취소했어요.");
+                    } else {
+                        showToast("주문 취소 실패");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    showToast("주문 취소 오류: " + t.getMessage());
                 }
             });
         }

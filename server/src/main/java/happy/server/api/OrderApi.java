@@ -26,4 +26,10 @@ public class OrderApi {
         return orderService.findOrdersDtoById(dto.getMemberId());
     }
 
+    @PostMapping("/api/orderCancel/{orderId}")
+    public String cancelOrder(@PathVariable("orderId") Long orderId) {
+        orderService.cancelOrder(orderId);
+        return "1";
+    }
+
 }

@@ -6,5 +6,6 @@
     <color name="colorPrimary">#FF000000</color>
     <color name="colorPrimaryDark">#FF000000</color>
     <color name="colorBackground">#f5f5f5</color>
+    <color name="colorCancel">#ffdfd4</color>
 
 </resources>

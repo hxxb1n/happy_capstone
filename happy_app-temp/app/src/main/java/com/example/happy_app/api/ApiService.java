@@ -10,6 +10,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ApiService {
     @POST("/api/myOrder")
@@ -17,5 +18,8 @@ public interface ApiService {
 
     @POST("/api/myOrderParcelTrackingNumber")
     Call<ParcelDto> getParcelTrackingNumber(@Body OrderRequestDto orderRequestDto);
+
+    @POST("/api/orderCancel/{orderId}")
+    Call<String> cancelOrder(@Path("orderId") Long orderId);
 
 }

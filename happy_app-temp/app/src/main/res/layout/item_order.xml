@@ -8,6 +8,7 @@
     app:cardElevation="8dp">
 
     <LinearLayout
+        android:id="@+id/orderItemLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -80,22 +81,12 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/buttonAddToCart"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:text="주문취소"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <com.google.android.material.button.MaterialButton
                     android:id="@+id/buttonOrderCancel"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
-                    android:text="배송정보"
+                    android:text="주문취소"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
