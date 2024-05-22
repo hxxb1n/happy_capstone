@@ -5,6 +5,7 @@ import happy.server.entity.Order;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -16,8 +17,13 @@ public class OrderRepository {
 
     private final EntityManager em;
 
+    @Transactional
     public void save(Order order) {
-        em.persist(order);
+        if (order.getId() == null) {
+            em.persist(order);
+        } else {
+            em.merge(order);
+        }
     }
 
     public Order findOne(long id) {
@@ -50,6 +56,12 @@ public class OrderRepository {
     public List<Order> findAllById(Long id) {
         return em.createQuery("select o from Order o join o.member m where m.id = :id", Order.class)
                 .setParameter("id", id).getResultList();
+    }
+
+    public Order findOrderIdByTrackingNumber(String trackingNumber) {
+        return em.createQuery("select o from Order o join o.delivery d join d.parcel p where p.trackingNumber = :trackingNumber", Order.class)
+                .setParameter("trackingNumber", trackingNumber)
+                .getSingleResult();
     }
 
 }

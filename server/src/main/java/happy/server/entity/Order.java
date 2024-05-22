@@ -32,6 +32,7 @@ public class Order {
     private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
+    @Column(length = 20)
     private OrderStatus status;
 
     // 관계 생성
@@ -55,13 +56,18 @@ public class Order {
 
     // 주문 취소
     public void cancel() {
-        if (delivery.getStatus() == DeliveryStatus.COMP) {
+        if (this.getStatus() == OrderStatus.DELIVERED) {
             throw new IllegalStateException("이미 배송완료된 상품입니다.");
         }
         this.setStatus(OrderStatus.CANCEL);
         for (OrderItem orderItem : orderItems) {
             orderItem.cancel();
         }
+    }
+
+    // 배송 완료
+    public void complete() {
+        this.setStatus(OrderStatus.DELIVERED);
     }
 
     // 전체 가격 조회

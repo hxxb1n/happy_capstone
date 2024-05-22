@@ -101,6 +101,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 orderItemLayout.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.colorCancel));
                 buttonBuyNow.setVisibility(View.GONE);
                 buttonOrderCancel.setVisibility(View.GONE);
+            } else if (order.getOrderStatus().equals("DELIVERED")) {
+                orderItemLayout.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.colorComplete));
+                buttonBuyNow.setVisibility(View.GONE);
+                buttonOrderCancel.setVisibility(View.GONE);
             } else {
                 orderItemLayout.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.white));
                 buttonBuyNow.setVisibility(View.VISIBLE);
@@ -163,7 +167,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                         buttonOrderCancel.setVisibility(View.GONE);
                         showToast("주문을 취소했어요.");
                     } else {
-                        showToast("주문 취소 실패");
+                        showToast("이미 배송이 완료된 주문이에요.");
                     }
                 }
 
