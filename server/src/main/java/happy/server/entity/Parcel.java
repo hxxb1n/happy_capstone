@@ -24,7 +24,7 @@ public class Parcel {
     private String trackingNumber;
 
     public Parcel() {
-        this.trackingNumber = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 12);
+        this.trackingNumber = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 6);
     }
 
 }
