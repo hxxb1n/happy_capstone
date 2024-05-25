@@ -95,7 +95,7 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="출입바코드"
+                    android:text="송장보기"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 

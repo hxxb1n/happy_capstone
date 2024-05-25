@@ -1,7 +1,9 @@
 package happy.server.repository;
 
 
+import happy.server.entity.Address;
 import happy.server.entity.Order;
+import happy.server.entity.OrderStatus;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -61,6 +63,24 @@ public class OrderRepository {
     public Order findOrderIdByTrackingNumber(String trackingNumber) {
         return em.createQuery("select o from Order o join o.delivery d join d.parcel p where p.trackingNumber = :trackingNumber", Order.class)
                 .setParameter("trackingNumber", trackingNumber)
+                .getSingleResult();
+    }
+
+    public List<Order> findAllDeliveryOrder() {
+        return em.createQuery("select o from Order o where o.status = :status", Order.class)
+                .setParameter("status", OrderStatus.ORDER)
+                .getResultList();
+    }
+
+    public List<Order> findAllDeliveredOrder() {
+        return em.createQuery("select o from Order o where o.status = :status", Order.class)
+                .setParameter("status", OrderStatus.DELIVERED)
+                .getResultList();
+    }
+
+    public Address findAddressByOrderId(Long orderId) {
+        return em.createQuery("select m.address from Order o join o.member m where o.id = :orderId", Address.class)
+                .setParameter("orderId", orderId)
                 .getSingleResult();
     }
 

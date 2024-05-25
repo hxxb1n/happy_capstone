@@ -11,7 +11,7 @@ public class BarcodeUtils {
     public static Bitmap generateBarcode(String data) {
         BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
         try {
-            return barcodeEncoder.encodeBitmap(data, BarcodeFormat.CODE_128, 860, 400);
+            return barcodeEncoder.encodeBitmap(data, BarcodeFormat.CODE_128, 1050, 400);
         } catch (WriterException e) {
             e.printStackTrace();
             return null;
