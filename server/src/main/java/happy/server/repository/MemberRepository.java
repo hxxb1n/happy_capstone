@@ -1,8 +1,8 @@
 package happy.server.repository;
 
+import happy.server.entity.Address;
 import happy.server.entity.Member;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -47,6 +47,12 @@ public class MemberRepository {
 
     public Optional<Member> findByLoginId(final Long memberId) {
         return findAll().stream().filter(m -> Objects.equals(m.getId(), memberId)).findFirst();
+    }
+
+    public Address findAddressByOrderId(Long orderId) {
+        return em.createQuery("select m.address from Order o join o.member m where o.id = :orderId", Address.class)
+                .setParameter("orderId", orderId)
+                .getSingleResult();
     }
 
 }

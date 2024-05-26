@@ -37,4 +37,8 @@ public class ApiClient {
         return getRetrofitInstance().create(MemberApi.class);
     }
 
+    public static DeliveryApi getDeliveryApiService() {
+        return getRetrofitInstance().create(DeliveryApi.class);
+    }
+
 }

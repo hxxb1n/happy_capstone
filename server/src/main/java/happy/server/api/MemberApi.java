@@ -4,7 +4,6 @@ import happy.server.dto.AddressUpdateRequest;
 import happy.server.entity.Address;
 import happy.server.entity.Authority;
 import happy.server.entity.Member;
-import happy.server.repository.MemberRepository;
 import happy.server.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.Data;

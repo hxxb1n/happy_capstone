@@ -1,6 +1,5 @@
 package happy.server.controller;
 
-import happy.server.entity.Address;
 import happy.server.entity.Authority;
 import happy.server.entity.Member;
 import happy.server.service.MemberService;
